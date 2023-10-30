@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IKUN</title>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        place-items: center;
+        min-width: 320px;
+        min-height: 100vh;
+      }
+    </style>
+    <style>
+      #home_logo {
+        scale: 1.5;
+        position: relative;
+        width: 150px;
+        margin: 20px auto;
+        --t: 3s;
+        /* --play-status: paused; */
+        --play-status: running;
+      }
+      #home_logo:hover {
+        --play-status: running;
+      }
+
+      @media (max-width: 960px) {
+        #home_logo {
+          top: 20%;
+        }
+      }
+    </style>
+    <style>
+      .logo-grey {
+        width: 52px;
+        height: 52px;
+        position: relative;
+        transform: rotate(135deg);
+        margin: auto;
+        animation: logo-grey var(--t) infinite
+          cubic-bezier(0.68, -0.55, 0.265, 1.55) var(--play-status);
+        overflow: hidden;
+      }
+      .logo-grey::before,
+      .logo-grey::after {
+        content: "";
+        position: absolute;
+        width: 52px;
+        height: 26px;
+        background-color: #999;
+        /*border-radius: 0 0 0 100%;*/
+      }
+      .logo-grey::before {
+        left: 0;
+        transform-origin: 100% 0;
+        transform: rotate(8deg);
+        animation: mid-split-right var(--t) infinite
+          cubic-bezier(0.68, -0.55, 0.265, 1.55) var(--play-status);
+      }
+      .logo-grey::after {
+        width: 26px;
+        height: 52px;
+        right: 0;
+        transform-origin: 100% 0;
+        transform: rotate(-8deg);
+        animation: mid-split-left var(--t) infinite
+          cubic-bezier(0.68, -0.55, 0.265, 1.55) var(--play-status);
+      }
+      @keyframes logo-grey {
+        0%,
+        50%,
+        100% {
+          transform: translateY(0) rotate(135deg);
+        }
+        25%,
+        75% {
+          transform: translateY(10%) rotate(135deg);
+        }
+      }
+      @keyframes mid-split-left {
+        0%,
+        50%,
+        100% {
+          transform: rotate(-8deg);
+        }
+        30%,
+        80% {
+          transform: rotate(1deg);
+        }
+      }
+      @keyframes mid-split-right {
+        0%,
+        50%,
+        100% {
+          transform: rotate(8deg);
+        }
+        30%,
+        80% {
+          transform: rotate(-1deg);
+        }
+      }
+    </style>
+    <style>
+      .logo-black {
+        width: 84px;
+        height: 84px;
+        background: #000;
+        position: relative;
+        transform: rotate(45deg);
+        overflow: hidden;
+        clip-path: polygon(
+          33% 0,
+          100% 0,
+          100% 100%,
+          0 100%,
+          0 33%,
+          33% 33%,
+          33% 0
+        );
+        margin: -5px auto auto;
+        animation: logo-black var(--t) infinite var(--play-status);
+      }
+      .logo-black::before,
+      .logo-black::after {
+        content: "";
+        position: absolute;
+        background-color: #fff;
+        width: 6px;
+        height: 100%;
+      }
+      .logo-black::before {
+        top: 25%;
+        left: 10%;
+        transform: rotate(-45deg);
+      }
+      .logo-black::after {
+        top: -25%;
+        right: 10%;
+        transform: rotate(-45deg);
+      }
+      .logo-black span {
+        position: absolute;
+        top: 25%;
+        left: 25%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, #fff 50%, #000 50%) 50% 0 / 10%
+          20% repeat-y;
+        transform: rotate(-45deg);
+      }
+      @keyframes logo-black {
+        0%,
+        10%,
+        90%,
+        100% {
+          transform: translateY(0) rotate(45deg);
+        }
+        35% {
+          transform: translate(10px, -10px) rotate(45deg);
+        }
+        40% {
+          transform: translate(0, 0) rotate(45deg);
+        }
+        50% {
+          transform: translate(10px, 10px) rotate(45deg);
+        }
+        65% {
+          transform: translate(0, 0) rotate(45deg);
+        }
+        70% {
+          transform: translate(10px, -10px) rotate(45deg);
+        }
+        75% {
+          transform: translate(10px, 10px) rotate(45deg);
+        }
+        20%,
+        30%,
+        80% {
+          transform: translateY(5px) rotate(45deg);
+        }
+      }
+    </style>
+    <style>
+      .logo-circle {
+        width: 100%;
+        height: 130px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation: logo-circle var(--t) infinite var(--play-status);
+      }
+      .logo-circle::after {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-color: #f80;
+        border-radius: 50%;
+        bottom: 0;
+        left: 0;
+        animation: play 1s infinite;
+      }
+      .shadow {
+        position: absolute;
+        bottom: -30px;
+        left: 0;
+        width: 30px;
+        height: 10px;
+        border-radius: 50%;
+        background: radial-gradient(#666, transparent 50%);
+        animation: play-shadow 1s infinite;
+        transform: scale(0.5);
+      }
+      .play .logo-circle::after {
+        animation-play-state: paused;
+      }
+      .play .shadow {
+        display: none;
+      }
+      @keyframes logo-circle {
+        25% {
+          transform: rotate(-60deg);
+        }
+        50% {
+          transform: rotate(-90deg);
+        }
+        75% {
+          transform: rotate(-30deg);
+        }
+      }
+      @keyframes play {
+        40% {
+          transform: translateY(20px);
+        }
+      }
+      @keyframes play-shadow {
+        40% {
+          transform: scale(1);
+        }
+      }
+      @keyframes run-shadow {
+        25% {
+          left: 78px;
+          transform: scale(1) translateY(10px);
+        }
+        50% {
+          left: 118px;
+          transform: scale(0.5);
+        }
+        75% {
+          left: 40px;
+          transform: scale(1) translateY(10px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section id="home_logo">
+      <section class="logo-grey"></section>
+      <section class="logo-black">
+        <span></span>
+      </section>
+      <section class="logo-circle"></section>
+      <section class="shadow"></section>
+    </section>
+  </body>
+</html>
